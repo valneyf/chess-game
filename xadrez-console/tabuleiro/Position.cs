@@ -1,11 +1,11 @@
 ﻿namespace tabuleiro
 {
-    class Posicao
+    class Position
     {
         public int row { get; set; }
         public int column { get; set; }
 
-        public Posicao(int row, int column)
+        public Position(int row, int column)
         {
             this.row = row;
             this.column = column;
