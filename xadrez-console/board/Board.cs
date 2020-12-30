@@ -1,4 +1,4 @@
-﻿namespace tabuleiro
+﻿namespace board
 {
     class Board
     {
@@ -11,6 +11,11 @@
             this.rows = rows;
             this.columns = columns;
             pieces = new Piece[rows, columns];
+        }
+
+        public Piece piece(int row, int column)
+        {
+            return pieces[row, column];
         }
     }
 }

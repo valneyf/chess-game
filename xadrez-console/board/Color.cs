@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace tabuleiro
+namespace board
 {
     enum Color
     {

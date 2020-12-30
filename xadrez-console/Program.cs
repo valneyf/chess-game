@@ -1,5 +1,5 @@
 ﻿using System;
-using tabuleiro;
+using board;
 
 namespace xadrez_console
 {
@@ -8,6 +8,8 @@ namespace xadrez_console
         static void Main(string[] args)
         {
             Board board = new Board(8, 8);
+
+            Display.displayBoard(board);
 
             Console.ReadLine();
         }
