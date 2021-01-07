@@ -1,4 +1,6 @@
-﻿namespace board
+﻿using System;
+
+namespace board
 {
     class Board
     {
@@ -18,10 +20,42 @@
             return pieces[row, column];
         }
 
+        public Piece piece(Position pos)
+        {
+            return pieces[pos.row, pos.column];
+        }
+
+        public bool thereIsPiece(Position pos)
+        {
+            validatePosition(pos);
+            return piece(pos) != null;
+        }
+
         public void insertPiece(Piece p, Position pos)
         {
+            if (thereIsPiece(pos))
+            {
+                throw new BoardException("Already a piece on this position");
+            }
             pieces[pos.row, pos.column] = p;
             p.position = pos;
+        }
+
+        public bool validPosition(Position pos)
+        {
+            if (pos.row < 0 || pos.row >= rows || pos.column < 0 || pos.column >= columns)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void validatePosition(Position pos)
+        {
+            if (!validPosition(pos))
+            {
+                throw new BoardException("Invalid position!");
+            }
         }
     }
 }
