@@ -14,5 +14,10 @@
             this.color = color;
             this.moves = 0;
         }
+
+        public void increaseMoves()
+        {
+            moves++;
+        }
     }
 }
