@@ -1,17 +1,14 @@
 ﻿using System;
 using board;
 
-namespace chess
-{
-    class ChessMatch
-    {
+namespace chess {
+    class ChessMatch {
         public Board board { get; private set; }
         private int turn;
         private Color currentPlayer;
         public bool finished { get; private set; }
 
-        public ChessMatch()
-        {
+        public ChessMatch() {
             board = new Board(8, 8);
             turn = 1;
             currentPlayer = Color.White;
@@ -19,16 +16,14 @@ namespace chess
             insertPieces();
         }
 
-        public void executeMove(Position origin, Position destination)
-        {
+        public void executeMove(Position origin, Position destination) {
             Piece piece = board.removePiece(origin);
             piece.increaseMoves();
             Piece capturePiece = board.removePiece(destination);
             board.insertPiece(piece, destination);
         }
 
-        private void insertPieces()
-        {
+        private void insertPieces() {
             board.insertPiece(new Tower(board, Color.White), new ChessPosition('c', 1).toPosition());
             board.insertPiece(new Tower(board, Color.White), new ChessPosition('c', 2).toPosition());
             board.insertPiece(new Tower(board, Color.White), new ChessPosition('d', 2).toPosition());

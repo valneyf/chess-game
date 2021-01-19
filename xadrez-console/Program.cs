@@ -17,11 +17,17 @@ namespace xadrez_console
                 {
                     Console.Clear();
                     Display.displayBoard(match.board);
-                    Console.WriteLine();
 
+                    Console.WriteLine();
                     Console.Write("Origem: ");
                     Position origin = Display.readChessPosition().toPosition();
 
+                    bool[,] possiblePositions = match.board.piece(origin).possibleMoves();
+
+                    Console.Clear();
+                    Display.displayBoard(match.board, possiblePositions);
+
+                    Console.WriteLine();
                     Console.Write("Destino: ");
                     Position destination = Display.readChessPosition().toPosition();
 

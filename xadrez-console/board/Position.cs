@@ -11,6 +11,12 @@
             this.column = column;
         }
 
+        public void setPosition(int row, int column)
+        {
+            this.row = row;
+            this.column = column;
+        }
+
         public override string ToString()
         {
             return row
