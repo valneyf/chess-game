@@ -4,8 +4,8 @@ using board;
 namespace chess {
     class ChessMatch {
         public Board board { get; private set; }
-        private int turn;
-        private Color currentPlayer;
+        public int turn { get; private set; }
+        public Color currentPlayer { get; private set; }
         public bool finished { get; private set; }
 
         public ChessMatch() {
@@ -21,6 +21,39 @@ namespace chess {
             piece.increaseMoves();
             Piece capturePiece = board.removePiece(destination);
             board.insertPiece(piece, destination);
+        }
+
+        public void performMove(Position origin, Position destination) {
+            executeMove(origin, destination);
+            turn++;
+            changePlayer();
+        }
+
+        public void validateOriginPosition(Position pos) {
+            if (board.piece(pos) == null) {
+                throw new BoardException("There is no piece in the chosen origin position!");
+            }
+            if (currentPlayer != board.piece(pos).color) {
+                throw new BoardException("The piece of chosen origin is not yours!");
+            }
+            if (!board.piece(pos).checkPossibleMoves()) {
+                throw new BoardException("No movements possible for the selected origin piece!");
+            }
+        }
+
+        public void validateDestinationPosition(Position origin, Position destination) {
+            if (!board.piece(origin).canMoveTo(destination)) {
+                throw new BoardException("Invalid destination position!");
+            }
+        }
+
+        private void changePlayer() {
+            if (currentPlayer == Color.White) {
+                currentPlayer = Color.Black;
+            }
+            else {
+                currentPlayer = Color.White;
+            }
         }
 
         private void insertPieces() {

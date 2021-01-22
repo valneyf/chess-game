@@ -15,23 +15,34 @@ namespace xadrez_console
 
                 while (!match.finished)
                 {
-                    Console.Clear();
-                    Display.displayBoard(match.board);
+                    try {
+                        Console.Clear();
+                        Display.displayBoard(match.board);
+                        Console.WriteLine();
+                        Console.WriteLine("Turn: " + match.turn);
+                        Console.WriteLine("Waiting move: " + match.currentPlayer);
 
-                    Console.WriteLine();
-                    Console.Write("Origem: ");
-                    Position origin = Display.readChessPosition().toPosition();
+                        Console.WriteLine();
+                        Console.Write("Origem: ");
+                        Position origin = Display.readChessPosition().toPosition();
+                        match.validateOriginPosition(origin);
 
-                    bool[,] possiblePositions = match.board.piece(origin).possibleMoves();
+                        bool[,] possiblePositions = match.board.piece(origin).possibleMoves();
 
-                    Console.Clear();
-                    Display.displayBoard(match.board, possiblePositions);
+                        Console.Clear();
+                        Display.displayBoard(match.board, possiblePositions);
 
-                    Console.WriteLine();
-                    Console.Write("Destino: ");
-                    Position destination = Display.readChessPosition().toPosition();
+                        Console.WriteLine();
+                        Console.Write("Destino: ");
+                        Position destination = Display.readChessPosition().toPosition();
+                        match.validateDestinationPosition(origin, destination);
 
-                    match.executeMove(origin, destination);
+                        match.performMove(origin, destination);
+                    }
+                    catch(BoardException e) {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
                 }
                 
 
