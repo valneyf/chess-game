@@ -1,9 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
 using board;
 using chess;
 
 namespace xadrez_console {
     class Display {
+        public static void displayMatch(ChessMatch match) {
+            displayBoard(match.board);
+            Console.WriteLine();
+            displayCapturedPieces(match);
+            Console.WriteLine();
+            Console.WriteLine("Turn: " + match.turn);
+            Console.WriteLine("Waiting move: " + match.currentPlayer);
+        }
+
+        public static void displayCapturedPieces(ChessMatch match) {
+            Console.WriteLine("Captured Pieces:");
+            Console.Write("White: ");            
+            displaySetOfPieces(match.capturedPieces(Color.White));
+            Console.WriteLine();
+            Console.Write("Black: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            displaySetOfPieces(match.capturedPieces(Color.Black));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+        }
+
+        public static void displaySetOfPieces(HashSet<Piece> group) {
+            Console.Write("[");
+            foreach (Piece x in group) {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
+        }
         public static void displayBoard(Board board) {
             for (int i = 0; i < board.rows; i++) {
                 Console.Write(8 - i + " ");
