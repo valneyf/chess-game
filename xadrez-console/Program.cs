@@ -2,19 +2,14 @@
 using board;
 using chess;
 
-namespace xadrez_console
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            try
-            {
+namespace xadrez_console {
+    class Program {
+        static void Main(string[] args) {
+            try {
                 ChessMatch match = new ChessMatch();
 
 
-                while (!match.finished)
-                {
+                while (!match.finished) {
                     try {
                         Console.Clear();
                         Display.displayMatch(match);
@@ -36,16 +31,15 @@ namespace xadrez_console
 
                         match.performMove(origin, destination);
                     }
-                    catch(BoardException e) {
+                    catch (BoardException e) {
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
                 }
-                
+
 
             }
-            catch (BoardException e)
-            {   
+            catch (BoardException e) {
                 Console.WriteLine(e.Message);
             }
             Console.ReadLine();

@@ -1,24 +1,19 @@
-﻿namespace board
-{
-    class Position
-    {
+﻿namespace board {
+    class Position {
         public int row { get; set; }
         public int column { get; set; }
 
-        public Position(int row, int column)
-        {
+        public Position(int row, int column) {
             this.row = row;
             this.column = column;
         }
 
-        public void setPosition(int row, int column)
-        {
+        public void setPosition(int row, int column) {
             this.row = row;
             this.column = column;
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return row
                 + ", "
                 + column;

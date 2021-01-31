@@ -1,14 +1,11 @@
-﻿namespace board
-{
-    abstract class Piece
-    {
+﻿namespace board {
+    abstract class Piece {
         public Position position { get; set; }
         public Color color { get; protected set; }
         public int moves { get; protected set; }
         public Board board { get; protected set; }
 
-        public Piece(Board board, Color color)
-        {
+        public Piece(Board board, Color color) {
             this.position = null;
             this.board = board;
             this.color = color;
@@ -19,11 +16,15 @@
             moves++;
         }
 
+        public void decreaseMoves() {
+            moves--;
+        }
+
         public bool checkPossibleMoves() {
             bool[,] mat = possibleMoves();
             for (int i = 0; i < board.rows; i++) {
                 for (int j = 0; j < board.columns; j++) {
-                    if (mat[i,j]) {
+                    if (mat[i, j]) {
                         return true;
                     }
                 }

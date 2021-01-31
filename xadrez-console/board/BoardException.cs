@@ -1,11 +1,8 @@
 ﻿using System;
 
-namespace board
-{
-    class BoardException : Exception
-    {
-        public BoardException(string msg) : base(msg)
-        {
+namespace board {
+    class BoardException : Exception {
+        public BoardException(string msg) : base(msg) {
 
         }
     }

@@ -12,11 +12,14 @@ namespace xadrez_console {
             Console.WriteLine();
             Console.WriteLine("Turn: " + match.turn);
             Console.WriteLine("Waiting move: " + match.currentPlayer);
+            if (match.check) {
+                Console.WriteLine("XEQUE!");
+            }
         }
 
         public static void displayCapturedPieces(ChessMatch match) {
             Console.WriteLine("Captured Pieces:");
-            Console.Write("White: ");            
+            Console.Write("White: ");
             displaySetOfPieces(match.capturedPieces(Color.White));
             Console.WriteLine();
             Console.Write("Black: ");
@@ -49,11 +52,11 @@ namespace xadrez_console {
 
             ConsoleColor standardBackground = Console.BackgroundColor;
             ConsoleColor alteredBackgound = ConsoleColor.DarkGray;
-            
+
             for (int i = 0; i < board.rows; i++) {
                 Console.Write(8 - i + " ");
                 for (int j = 0; j < board.columns; j++) {
-                    if (possiblePositions[i,j]) {
+                    if (possiblePositions[i, j]) {
                         Console.BackgroundColor = alteredBackgound;
                     }
                     else {
