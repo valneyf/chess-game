@@ -36,8 +36,8 @@ namespace xadrez_console {
                         Console.ReadLine();
                     }
                 }
-
-
+                Console.Clear();
+                Display.displayMatch(match);
             }
             catch (BoardException e) {
                 Console.WriteLine(e.Message);

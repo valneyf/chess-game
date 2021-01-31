@@ -11,9 +11,16 @@ namespace xadrez_console {
             displayCapturedPieces(match);
             Console.WriteLine();
             Console.WriteLine("Turn: " + match.turn);
-            Console.WriteLine("Waiting move: " + match.currentPlayer);
-            if (match.check) {
-                Console.WriteLine("XEQUE!");
+
+            if (!match.finished) {
+                Console.WriteLine("Waiting move: " + match.currentPlayer);
+                if (match.check) {
+                    Console.WriteLine("XEQUE!");
+                }
+            }
+            else {
+                Console.WriteLine("CHECKMATE!");
+                Console.WriteLine("Winner: " + match.currentPlayer); ;
             }
         }
 
