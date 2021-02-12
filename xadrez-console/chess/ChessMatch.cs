@@ -24,15 +24,37 @@ namespace chess {
         }
 
         public Piece executeMove(Position origin, Position destination) {
-            Piece piece = board.removePiece(origin);
-            piece.increaseMoves();
+            Piece p = board.removePiece(origin);
+            p.increaseMoves();
             Piece capturedPiece = board.removePiece(destination);
-            board.insertPiece(piece, destination);
+            board.insertPiece(p, destination);
             if (capturedPiece != null) {
                 captured.Add(capturedPiece);
             }
+
+            // Special Move -> Little Rock
+            if (p is King && destination.column == origin.column +2) {
+                Position towerOrigin = new Position(origin.row, origin.column +3);
+                Position towerDestination = new Position(origin.row, origin.column + 1);
+
+                Piece T = board.removePiece(towerOrigin);
+                T.increaseMoves();
+                board.insertPiece(T, towerDestination);
+            }
+
+            // Special Move -> Big Rock
+            if (p is King && destination.column == origin.column - 2) {
+                Position towerOrigin = new Position(origin.row, origin.column -4);
+                Position towerDestination = new Position(origin.row, origin.column - 1);
+
+                Piece T = board.removePiece(towerOrigin);
+                T.increaseMoves();
+                board.insertPiece(T, towerDestination);
+            }
+
             return capturedPiece;
         }
+        
 
         public void undoMove(Position origin, Position destination, Piece capturedPiece) {
             Piece p = board.removePiece(destination);
@@ -42,6 +64,26 @@ namespace chess {
                 captured.Remove(capturedPiece);
             }
             board.insertPiece(p, origin);
+
+            // Special Move -> Little Rock
+            if (p is King && destination.column == origin.column + 2) {
+                Position towerOrigin = new Position(origin.row, origin.column + 3);
+                Position towerDestination = new Position(origin.row, origin.column + 1);
+
+                Piece T = board.removePiece(towerDestination);
+                T.decreaseMoves();
+                board.insertPiece(T, towerOrigin);
+            }
+
+            // Special Move -> Big Rock
+            if (p is King && destination.column == origin.column - 2) {
+                Position towerOrigin = new Position(origin.row, origin.column - 4);
+                Position towerDestination = new Position(origin.row, origin.column - 1);
+
+                Piece T = board.removePiece(towerDestination);
+                T.decreaseMoves();
+                board.insertPiece(T, towerOrigin);
+            }
         }
         
         public void performMove(Position origin, Position destination) {
@@ -183,7 +225,7 @@ namespace chess {
             insertNewPiece('b', 1, new Horse(board, Color.White));
             insertNewPiece('c', 1, new Bishop(board, Color.White));
             insertNewPiece('d', 1, new Queen(board, Color.White));
-            insertNewPiece('e', 1, new King(board, Color.White));
+            insertNewPiece('e', 1, new King(board, Color.White, this));
             insertNewPiece('f', 1, new Bishop(board, Color.White));
             insertNewPiece('g', 1, new Horse(board, Color.White));
             insertNewPiece('h', 1, new Tower(board, Color.White));
@@ -200,7 +242,7 @@ namespace chess {
             insertNewPiece('b', 8, new Horse(board, Color.Black));
             insertNewPiece('c', 8, new Bishop(board, Color.Black));
             insertNewPiece('d', 8, new Queen(board, Color.Black));
-            insertNewPiece('e', 8, new King(board, Color.Black));
+            insertNewPiece('e', 8, new King(board, Color.Black, this));
             insertNewPiece('f', 8, new Bishop(board, Color.Black));
             insertNewPiece('g', 8, new Horse(board, Color.Black));
             insertNewPiece('h', 8, new Tower(board, Color.Black));

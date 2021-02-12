@@ -28,7 +28,7 @@ namespace chess {
                 if (board.piece(pos) != null && board.piece(pos).color != color) {
                     break;
                 }
-                pos.setPosition(position.row, position.column - 1);
+                pos.setPosition(pos.row, pos.column - 1);
             }
 
             // right
@@ -38,7 +38,7 @@ namespace chess {
                 if (board.piece(pos) != null && board.piece(pos).color != color) {
                     break;
                 }
-                pos.setPosition(position.row - 1, position.column);
+                pos.setPosition(pos.row, pos.column + 1);
             }
 
             // above
@@ -48,7 +48,7 @@ namespace chess {
                 if (board.piece(pos) != null && board.piece(pos).color != color) {
                     break;
                 }
-                pos.setPosition(position.row - 1, position.column);
+                pos.setPosition(pos.row - 1, pos.column);
             }
 
             // below
@@ -58,7 +58,7 @@ namespace chess {
                 if (board.piece(pos) != null && board.piece(pos).color != color) {
                     break;
                 }
-                pos.setPosition(position.row + 1, position.column);
+                pos.setPosition(pos.row + 1, pos.column);
             }
 
             // northwest
@@ -68,7 +68,7 @@ namespace chess {
                 if (board.piece(pos) != null && board.piece(pos).color != color) {
                     break;
                 }
-                pos.setPosition(position.row - 1, position.column - 1);
+                pos.setPosition(pos.row - 1, pos.column - 1);
             }
 
             // northeast
@@ -78,7 +78,7 @@ namespace chess {
                 if (board.piece(pos) != null && board.piece(pos).color != color) {
                     break;
                 }
-                pos.setPosition(position.row - 1, position.column + 1);
+                pos.setPosition(pos.row - 1, pos.column + 1);
             }
 
             // southeast
@@ -88,7 +88,7 @@ namespace chess {
                 if (board.piece(pos) != null && board.piece(pos).color != color) {
                     break;
                 }
-                pos.setPosition(position.row + 1, position.column + 1);
+                pos.setPosition(pos.row + 1, pos.column + 1);
             }
 
             // southwest
@@ -98,7 +98,7 @@ namespace chess {
                 if (board.piece(pos) != null && board.piece(pos).color != color) {
                     break;
                 }
-                pos.setPosition(position.row + 1, position.column - 1);
+                pos.setPosition(pos.row + 1, pos.column - 1);
             }
 
             return mat;
